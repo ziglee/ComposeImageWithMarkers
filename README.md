@@ -1,1 +1,1 @@
-# ComposeImagePins
+# ComposeImageWithMarkers

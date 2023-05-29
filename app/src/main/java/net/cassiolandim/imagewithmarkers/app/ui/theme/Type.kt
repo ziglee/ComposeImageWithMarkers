@@ -1,4 +1,4 @@
-package net.cassiolandim.composepin.ui.theme
+package net.cassiolandim.imagewithmarkers.app.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

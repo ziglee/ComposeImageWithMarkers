@@ -16,12 +16,10 @@
         <activity
             android:name=".ImageActivity"
             android:exported="false"
-            android:label="@string/title_activity_image"
             android:theme="@style/Theme.ComposePin" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.ComposePin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +30,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="" />
+            android:value="${MAPS_API_KEY}" />
     </application>
 
 </manifest>

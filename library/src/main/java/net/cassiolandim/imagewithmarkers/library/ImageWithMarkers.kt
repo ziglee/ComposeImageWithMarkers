@@ -1,4 +1,4 @@
-package net.cassiolandim.composepin
+package net.cassiolandim.imagewithmarkers.library
 
 import android.util.Log
 import androidx.annotation.FloatRange

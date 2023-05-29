@@ -1,4 +1,4 @@
-package net.cassiolandim.composepin.ui.theme
+package net.cassiolandim.imagewithmarkers.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

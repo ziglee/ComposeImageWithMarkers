@@ -1,11 +1,12 @@
-package net.cassiolandim.composepin
+package net.cassiolandim.imagewithmarkers.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import net.cassiolandim.composepin.ui.theme.ComposePinTheme
+import net.cassiolandim.imagewithmarkers.app.ui.theme.ComposePinTheme
+import net.cassiolandim.imagewithmarkers.library.ImageWithMarkers
 
 class ImageActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

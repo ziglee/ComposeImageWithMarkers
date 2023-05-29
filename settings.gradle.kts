@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeImageWithMarkers"
 include(":app")
+include(":library")
