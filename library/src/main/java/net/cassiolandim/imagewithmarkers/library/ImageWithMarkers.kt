@@ -1,7 +1,6 @@
 package net.cassiolandim.imagewithmarkers.library
 
 import android.util.Log
-import androidx.annotation.FloatRange
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -21,13 +20,10 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
+import net.cassiolandim.imagewithmarkers.library.model.ImageMarker
 import kotlin.math.atan2
 import kotlin.math.sqrt
 
-data class ImageMarker(
-    @FloatRange(from = 0.0, to = 1.0) val x: Float,
-    @FloatRange(from = 0.0, to = 1.0) val y: Float,
-)
 
 @Composable
 fun ImageWithMarkers(
@@ -36,6 +32,7 @@ fun ImageWithMarkers(
     imageHeight: Float,
     markers: List<ImageMarker>,
     modifier: Modifier = Modifier,
+    onMarkerClick: ((ImageMarker) -> Boolean) = { false },
 ) {
     val zero = LatLng(0.0, 0.0)
     val bottomRight = calculateBottomRightCoordinatesOfImage(imageWidth, -imageHeight)
@@ -89,12 +86,24 @@ fun ImageWithMarkers(
                 .fromPath(imagePath),
         )
         markers.forEach { marker ->
-            val markerState = rememberMarkerState(position = convertMarkerToLatLng(marker, imgBounds))
+            val markerState =
+                rememberMarkerState(position = convertMarkerToLatLng(marker, imgBounds))
             Marker(
-                state = markerState,
                 flat = true,
-                title = "Singapore",
-                snippet = "Marker in Singapore"
+                draggable = false,
+                state = markerState,
+                title = marker.title,
+                snippet = marker.snippet,
+                visible = marker.visible,
+                infoWindowAnchor = marker.infoWindowAnchor,
+                rotation = marker.rotation,
+                zIndex = marker.zIndex,
+                alpha = marker.alpha,
+                anchor = marker.anchor,
+                icon = marker.icon,
+                onClick = {
+                    onMarkerClick(marker)
+                }
             )
         }
     }
@@ -119,15 +128,15 @@ private fun convertMarkerToLatLng(marker: ImageMarker, imgBounds: LatLngBounds):
     val latitude = imgBounds.southwest.latitude
     val longitude = imgBounds.northeast.longitude
     return LatLng(
-        latitude * marker.y,
-        longitude * marker.x
+        latitude * marker.position.y,
+        longitude * marker.position.x
     )
 }
 
-private fun convertToLatLngMarker(latLng: LatLng, imgBounds: LatLngBounds): ImageMarker {
+private fun convertToLatLngMarker(latLng: LatLng, imgBounds: LatLngBounds): ImageMarker.Position {
     val latitude = imgBounds.southwest.latitude
     val longitude = imgBounds.northeast.longitude
-    return ImageMarker(
+    return ImageMarker.Position(
         x = (latLng.longitude / longitude).toFloat(),
         y = (latLng.latitude / latitude).toFloat()
     )
